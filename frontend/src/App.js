@@ -1,8 +1,18 @@
+import React from "react"
+import "antd/dist/antd.css"
+import { Provider } from "react-redux"
+import store from "./redux/store"
+import { ApolloProvider } from "@apollo/client"
+import client from "./apolloClient"
+import HomePage from "./componenets/HomePage"
+
 const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <HomePage />
+      </Provider>
+    </ApolloProvider>
   )
 }
 

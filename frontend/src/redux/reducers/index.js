@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
 import LunchChoices from "./LunchChoices"
-import SpinOptions from "./SpinOptions"
+import Options from "./Options"
 
-export default combineReducers({ LunchChoices, SpinOptions })
+export default combineReducers({ LunchChoices, Options })

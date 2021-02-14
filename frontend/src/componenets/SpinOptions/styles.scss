@@ -1,0 +1,23 @@
+.options-cntr {
+  width: 50%;
+  margin: 28px auto;
+
+  .main-options {
+    display: flex;
+  }
+
+  .additional-options {
+    height: 38px;
+    overflow: hidden;
+    transition: 400ms height ease-in-out;
+
+    &.show {
+      height: 100px;
+    }
+
+    #show-btn {
+      margin: 8px 0;
+      cursor: pointer;
+    }
+  }
+}

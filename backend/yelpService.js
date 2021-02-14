@@ -2,7 +2,7 @@ const { GraphQLDataSource } = require("apollo-datasource-graphql")
 const { gql } = require("apollo-server-express")
 
 class YelpGraphqlAPI extends GraphQLDataSource {
-  baseURL = "https://api.yelp.com/v3/graphql"
+  baseURL = process.env.YELP_API_URL || "https://api.yelp.com/v3/graphql"
 
   willSendRequest(request) {
     if (!request.headers) {
