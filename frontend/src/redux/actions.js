@@ -5,7 +5,13 @@ export const SetLocation = location => ({
   location
 })
 
-export const SetLunches = lunches => ({
+export const SetLunches = (lunches, winner) => ({
   type: actions.SET_LUNCHES,
-  lunches
+  lunches,
+  winner
+})
+
+export const SetIsSpinning = isSpinning => ({
+  type: actions.SET_IS_SPINNING,
+  isSpinning
 })

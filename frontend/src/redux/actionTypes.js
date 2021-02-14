@@ -1,2 +1,3 @@
 export const SET_LOCATION = "SET+LOCATION"
 export const SET_LUNCHES = "SET_LUNCHES"
+export const SET_IS_SPINNING = "SET_IS_SPINNING"

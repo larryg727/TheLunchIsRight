@@ -1,22 +1,27 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Spinner, LunchCard } from "./components"
+import SpinWheel from "./SpinWheel"
+import SpinResult from "./SpinResult"
 
-const LunchSpinner = ({ lunches }) => {
+const LunchSpinner = ({ lunches, winner }) => {
+  const [isSpinning, setIsSpinning] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSpinning(false)
+    }, 10000)
+  }, [])
+
   if (!lunches.length) return null
-  return (
-    <Spinner>
-      {lunches.map(lunch => (
-        <LunchCard key={lunch.name}>{lunch.name}</LunchCard>
-      ))}
-    </Spinner>
-  )
+  if (isSpinning) return <SpinWheel lunches={lunches} />
+  return <SpinResult winner={winner} />
 }
 
 LunchSpinner.propType = {
   lunches: PropTypes.arrayOf(
     PropTypes.objectOf({
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired
     })
   ).isRequired
 }

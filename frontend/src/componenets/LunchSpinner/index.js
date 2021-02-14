@@ -2,7 +2,8 @@ import { connect } from "react-redux"
 import LunchSpinner from "./LunchSpinner"
 
 const mapStateToProps = state => ({
-  lunches: state.LunchChoices.lunches
+  lunches: state.LunchChoices.lunches,
+  winner: state.LunchChoices.winner
 })
 
 const mapDispatchToProps = dispatch => ({})

@@ -7,8 +7,28 @@ import { OptionsContainer, OptionsMain, AdditionalOptionsExpander, ExpanderButto
 
 const GET_LUNCHES = gql`
   query getLunches($location: String!) {
-    lunches(location: $location) {
-      name
+    getLunchSpin(location: $location) {
+      winner {
+        id
+        name
+        url
+        display_phone
+        review_count
+        rating
+        price
+        photos
+        distance
+        location {
+          address1
+          city
+          state
+          postal_code
+        }
+      }
+      lunches {
+        id
+        name
+      }
     }
   }
 `
@@ -27,7 +47,7 @@ const SpinOptions = ({ location, setLocation, setLunches, hasLunches }) => {
 
   useEffect(() => {
     if (lunchData) {
-      setLunches(lunchData.lunches)
+      setLunches(lunchData.getLunchSpin.lunches, lunchData.getLunchSpin.winner)
     }
   }, [lunchData])
 

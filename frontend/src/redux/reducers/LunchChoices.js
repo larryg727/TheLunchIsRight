@@ -1,6 +1,7 @@
 import * as actions from "../actionTypes"
 const initialState = {
-  lunches: []
+  lunches: [],
+  isSpinning: false
 }
 
 export default (state = initialState, action) => {
@@ -8,7 +9,13 @@ export default (state = initialState, action) => {
     case actions.SET_LUNCHES:
       return {
         ...state,
-        lunches: action.lunches
+        lunches: action.lunches,
+        winner: action.winner
+      }
+    case actions.SET_IS_SPINNING:
+      return {
+        ...state,
+        isSpinning: action.isSpinning
       }
     default:
       return state

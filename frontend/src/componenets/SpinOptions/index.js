@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setLocation: location => dispatch(SetLocation(location)),
-  setLunches: lunches => dispatch(SetLunches(lunches))
+  setLunches: (lunches, winner) => dispatch(SetLunches(lunches, winner))
 })
 
 export default connect(

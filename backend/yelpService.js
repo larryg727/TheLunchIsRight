@@ -25,9 +25,23 @@ class YelpGraphqlAPI extends GraphQLDataSource {
 
 const GET_LUNCHES = gql`
   query GetLunches($location: String!) {
-    search(location: $location, limit: 5) {
+    search(location: $location, categories: "restaurants") {
       business {
+        id
         name
+        url
+        display_phone
+        review_count
+        rating
+        price
+        photos
+        distance
+        location {
+          address1
+          city
+          state
+          postal_code
+        }
       }
     }
   }
