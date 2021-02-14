@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Button, Input } from "antd"
 import { DownOutlined, UpOutlined } from "@ant-design/icons"
 import { useLazyQuery, gql } from "@apollo/client"
+import { OptionsContainer, OptionsMain, AdditionalOptionsExpander, ExpanderButton } from "./components"
 
 const GET_LUNCHES = gql`
   query getLunches($location: String!) {
@@ -12,7 +13,7 @@ const GET_LUNCHES = gql`
   }
 `
 
-const SpinOptions = ({ location, setLocation }) => {
+const SpinOptions = ({ location, setLocation, setLunches, hasLunches }) => {
   const [inputLocation, setInputLocation] = useState(location)
   const [showAdditional, setShowAdditional] = useState(false)
 
@@ -26,13 +27,14 @@ const SpinOptions = ({ location, setLocation }) => {
 
   useEffect(() => {
     if (lunchData) {
-      console.log(lunchData)
+      setLunches(lunchData.lunches)
     }
   }, [lunchData])
 
+  if (hasLunches) return null
   return (
-    <div className="options-cntr">
-      <div className="main-options">
+    <OptionsContainer>
+      <OptionsMain>
         <Input
           placeholder={"Location i.e. postal code, street name, etc"}
           value={inputLocation}
@@ -41,28 +43,30 @@ const SpinOptions = ({ location, setLocation }) => {
         <Button type={"primary"} onClick={handleGetLunches}>
           Spin The Wheel
         </Button>
-      </div>
-      <div className={showAdditional ? "additional-options show" : "additional-options"}>
-        <div id={"show-btn"} onClick={() => setShowAdditional(!showAdditional)}>
+      </OptionsMain>
+      <AdditionalOptionsExpander open={showAdditional}>
+        <ExpanderButton onClick={() => setShowAdditional(!showAdditional)}>
           {showAdditional ? (
             <>
-              <UpOutlined /> Hide additional options
+              Hide additional options <UpOutlined />
             </>
           ) : (
             <>
-              <DownOutlined /> Show additional options
+              Show additional options <DownOutlined />
             </>
           )}
-        </div>
+        </ExpanderButton>
         <h2>some other stuff</h2>
-      </div>
-    </div>
+      </AdditionalOptionsExpander>
+    </OptionsContainer>
   )
 }
 
 SpinOptions.propTypes = {
   location: PropTypes.string,
-  setLocation: PropTypes.func.isRequired
+  setLocation: PropTypes.func.isRequired,
+  setLunches: PropTypes.func.isRequired,
+  hasLunches: PropTypes.bool.isRequired
 }
 
 export default SpinOptions
