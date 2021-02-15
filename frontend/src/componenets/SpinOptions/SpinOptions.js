@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Button, Input } from "antd"
+import { Alert, Button, Input } from "antd"
 import { DownOutlined, UpOutlined } from "@ant-design/icons"
 import { useLazyQuery, gql } from "@apollo/client"
 import { OptionsContainer, OptionsMain, AdditionalOptionsExpander, ExpanderButton } from "./components"
+import AdditionalOptionsForm from "../AdditionalOptionsForm"
 
 const GET_LUNCHES = gql`
-  query getLunches($location: String!) {
-    getLunchSpin(location: $location) {
+  query getLunches($location: String!, $categories: String!, $radius: Float!, $price: String!) {
+    getLunchSpin(location: $location, categories: $categories, radius: $radius, price: $price) {
       winner {
         id
         name
@@ -33,16 +34,28 @@ const GET_LUNCHES = gql`
   }
 `
 
-const SpinOptions = ({ location, setLocation, setLunches, hasLunches }) => {
+const SpinOptions = ({ location, setLocation, setLunches, hasLunches, additionalOptions }) => {
   const [inputLocation, setInputLocation] = useState(location)
   const [showAdditional, setShowAdditional] = useState(false)
+  const [error, setError] = useState("")
 
   const [getLunches, { data: lunchData }] = useLazyQuery(GET_LUNCHES)
 
   const handleGetLunches = () => {
-    if (!inputLocation) return
+    if (!inputLocation) {
+      setError("A location is required")
+      return
+    }
+    setError("")
     setLocation(inputLocation)
-    getLunches({ variables: { location: inputLocation } })
+    getLunches({
+      variables: {
+        location: inputLocation,
+        categories: additionalOptions.categories.length ? additionalOptions.categories.join(",") : "restaurants",
+        radius: additionalOptions.radius,
+        price: additionalOptions.price.join(",")
+      }
+    })
   }
 
   useEffect(() => {
@@ -64,6 +77,7 @@ const SpinOptions = ({ location, setLocation, setLunches, hasLunches }) => {
           Spin The Wheel
         </Button>
       </OptionsMain>
+      {error && <Alert type={"error"} message={error} />}
       <AdditionalOptionsExpander open={showAdditional}>
         <ExpanderButton onClick={() => setShowAdditional(!showAdditional)}>
           {showAdditional ? (
@@ -76,7 +90,7 @@ const SpinOptions = ({ location, setLocation, setLunches, hasLunches }) => {
             </>
           )}
         </ExpanderButton>
-        <h2>some other stuff</h2>
+        <AdditionalOptionsForm />
       </AdditionalOptionsExpander>
     </OptionsContainer>
   )
@@ -86,7 +100,12 @@ SpinOptions.propTypes = {
   location: PropTypes.string,
   setLocation: PropTypes.func.isRequired,
   setLunches: PropTypes.func.isRequired,
-  hasLunches: PropTypes.bool.isRequired
+  hasLunches: PropTypes.bool.isRequired,
+  additionalOptions: PropTypes.shape({
+    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    radius: PropTypes.number.isRequired,
+    price: PropTypes.arrayOf(PropTypes.string).isRequired
+  }).isRequired
 }
 
 export default SpinOptions

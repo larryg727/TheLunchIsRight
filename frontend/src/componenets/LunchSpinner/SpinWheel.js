@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Spinner, LunchCard } from "./components"
-import LunchSpinner from "./LunchSpinner"
 
 const SpinWheel = ({ lunches }) => {
   return (

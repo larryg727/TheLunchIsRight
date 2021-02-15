@@ -4,6 +4,7 @@ import { SetLocation, SetLunches } from "../../redux/actions"
 
 const mapStateToProps = state => ({
   location: state.Options.location,
+  additionalOptions: state.Options.additionalOptions,
   hasLunches: state.LunchChoices.lunches.length > 0
 })
 

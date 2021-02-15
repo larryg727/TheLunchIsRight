@@ -9,7 +9,7 @@ export const OptionsMain = styled.div`
 `
 
 export const AdditionalOptionsExpander = styled.div`
-  height: ${props => (props.open ? "180px" : "38px")};
+  height: ${props => (props.open ? "380px" : "38px")};
   overflow: hidden;
   transition: 350ms height ease-in-out;
 `

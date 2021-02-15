@@ -24,8 +24,8 @@ class YelpGraphqlAPI extends GraphQLDataSource {
 }
 
 const GET_LUNCHES = gql`
-  query GetLunches($location: String!) {
-    search(location: $location, categories: "restaurants") {
+  query GetLunches($location: String!, $categories: String, $price: String, $radius: Float) {
+    search(location: $location, categories: $categories, price: $price, radius: $radius) {
       business {
         id
         name

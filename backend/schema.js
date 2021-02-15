@@ -1,14 +1,16 @@
 const { gql } = require("apollo-server-express")
 const RandomWinner = require("./randomWinner")
+const { getAllCategories } = require("./mockData")
 
 const typeDefs = gql`
   type Query {
-    getLunchSpin(location: String!): LunchSpin
+    getLunchSpin(location: String!, categories: String!, radius: Float!, price: String!): LunchSpin
+    categories: [Category]
   }
 
   type LunchSpin {
-    lunches: [Business]
-    winner: Business
+    lunches: [Business]!
+    winner: Business!
   }
 
   type Business {
@@ -30,6 +32,11 @@ const typeDefs = gql`
     state: String
     postal_code: String
   }
+
+  type Category {
+    title: String!
+    alias: String!
+  }
 `
 
 const resolvers = {
@@ -38,7 +45,8 @@ const resolvers = {
       const lunches = await context.YelpGraphqlAPI.getLunches(args)
       const randomWinner = new RandomWinner(lunches)
       return { lunches: randomWinner.lunches, winner: randomWinner.pickWinner() }
-    }
+    },
+    categories: () => getAllCategories()
   }
 }
 

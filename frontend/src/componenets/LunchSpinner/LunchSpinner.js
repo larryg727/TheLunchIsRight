@@ -9,7 +9,7 @@ const LunchSpinner = ({ lunches, winner }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsSpinning(false)
-    }, 10000)
+    }, 6000)
   }, [])
 
   if (!lunches.length) return null
@@ -19,7 +19,7 @@ const LunchSpinner = ({ lunches, winner }) => {
 
 LunchSpinner.propType = {
   lunches: PropTypes.arrayOf(
-    PropTypes.objectOf({
+    PropTypes.shape({
       name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired
     })

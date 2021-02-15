@@ -15,3 +15,8 @@ export const SetIsSpinning = isSpinning => ({
   type: actions.SET_IS_SPINNING,
   isSpinning
 })
+
+export const SetAdditionalOptions = additionalOptions => ({
+  type: actions.SET_ADDITIONAL_OPTIONS,
+  additionalOptions
+})
