@@ -25,7 +25,9 @@ const AdditionalOptionsForm = ({ additionalOptions, setAdditionalOptions }) => {
 
   const { data: categoriesData } = useQuery(GET_CATEGORIES, {
     onCompleted: data => {
-      formHandler("categories", data.categories.map(c => c.alias))
+      if (!formState.categories.length) {
+        formHandler("categories", data.categories.map(c => c.alias))
+      }
     }
   })
 
@@ -61,6 +63,7 @@ const AdditionalOptionsForm = ({ additionalOptions, setAdditionalOptions }) => {
           value={formState.categories}
           onChange={values => formHandler("categories", values)}
           onBlur={handleOnBlur}
+          allowClear={true}
         >
           {categoriesData &&
             categoriesData.categories.map(category => (

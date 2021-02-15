@@ -8,4 +8,4 @@ export const useFormHandler = initialState => {
 
 export const convertMetersToMiles = meters => Math.round(meters * 0.000621371)
 
-export const convertMilesToMeters = miles => (miles / 0.000621371).toFixed(2)
+export const convertMilesToMeters = miles => Math.round((miles / 0.000621371) * 100) / 100

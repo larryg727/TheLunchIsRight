@@ -1,14 +1,18 @@
-import React from "react"
-import SpinOptions from "../SpinOptions"
-import LunchSpinner from "../LunchSpinner"
+import { connect } from "react-redux"
+import HomePage from "./HomePage"
+import { SetIsSpinning, SetLunches } from "../../redux/actions"
 
-const HomePage = () => {
-  return (
-    <div>
-      <SpinOptions />
-      <LunchSpinner />
-    </div>
-  )
-}
+const mapStateToProps = state => ({
+  location: state.Options.location,
+  additionalOptions: state.Options.additionalOptions
+})
 
-export default HomePage
+const mapDispatchToProps = dispatch => ({
+  setLunches: (lunches, winner) => dispatch(SetLunches(lunches, winner)),
+  setIsSpinning: isSpinning => dispatch(SetIsSpinning(isSpinning))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePage)

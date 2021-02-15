@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express")
+const { gql, ApolloError } = require("apollo-server-express")
 const RandomWinner = require("./randomWinner")
 const { getAllCategories } = require("./mockData")
 
@@ -43,6 +43,9 @@ const resolvers = {
   Query: {
     getLunchSpin: async (parent, args, context) => {
       const lunches = await context.YelpGraphqlAPI.getLunches(args)
+      if (!lunches || !lunches.length) {
+        throw new ApolloError("No Results Found. Try another location")
+      }
       const randomWinner = new RandomWinner(lunches)
       return { lunches: randomWinner.lunches, winner: randomWinner.pickWinner() }
     },

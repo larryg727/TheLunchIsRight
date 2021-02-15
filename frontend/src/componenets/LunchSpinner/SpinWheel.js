@@ -1,13 +1,20 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Spinner, LunchCard } from "./components"
+import Skeleton from "react-loading-skeleton"
 
 const SpinWheel = ({ lunches }) => {
   return (
     <Spinner>
-      {lunches.map(lunch => (
-        <LunchCard key={lunch.id}>{lunch.name}</LunchCard>
-      ))}
+      {lunches.length
+        ? lunches.map(lunch => <LunchCard key={lunch.id}>{lunch.name}</LunchCard>)
+        : Array(4)
+            .fill()
+            .map((x, idx) => (
+              <LunchCard key={idx}>
+                <Skeleton />
+              </LunchCard>
+            ))}
     </Spinner>
   )
 }

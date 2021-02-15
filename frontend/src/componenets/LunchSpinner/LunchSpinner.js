@@ -3,18 +3,27 @@ import PropTypes from "prop-types"
 import SpinWheel from "./SpinWheel"
 import SpinResult from "./SpinResult"
 
-const LunchSpinner = ({ lunches, winner }) => {
-  const [isSpinning, setIsSpinning] = useState(true)
+const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches, getLunches }) => {
+  const spinAgain = () => {
+    setIsSpinning(true)
+    getLunches()
+  }
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsSpinning(false)
-    }, 6000)
-  }, [])
+    if (lunches.length && isSpinning) {
+      setTimeout(() => {
+        setIsSpinning(false)
+      }, 2000)
+    }
+  }, [lunches])
 
-  if (!lunches.length) return null
-  if (isSpinning) return <SpinWheel lunches={lunches} />
-  return <SpinResult winner={winner} />
+  if (!lunches.length && !isSpinning) return null
+  return (
+    <>
+      <SpinWheel lunches={lunches} />
+      <SpinResult winner={winner} isOpen={!isSpinning} clearLunches={clearLunches} spinAgain={spinAgain} />
+    </>
+  )
 }
 
 LunchSpinner.propType = {
@@ -23,7 +32,28 @@ LunchSpinner.propType = {
       name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  winner: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    display_phone: PropTypes.string,
+    review_count: PropTypes.number,
+    rating: PropTypes.number,
+    price: PropTypes.string,
+    photos: PropTypes.arrayOf(PropTypes.string),
+    distance: PropTypes.number,
+    location: PropTypes.shape({
+      address1: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      postal_code: PropTypes.string
+    })
+  }).isRequired,
+  isSpinning: PropTypes.bool.isRequired,
+  setIsSpinning: PropTypes.func.isRequired,
+  clearLunches: PropTypes.func.isRequired,
+  getLunches: PropTypes.func.isRequired
 }
 
 export default LunchSpinner
