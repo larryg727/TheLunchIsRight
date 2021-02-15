@@ -5,6 +5,7 @@ import SpinResult from "./SpinResult"
 
 const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches, getLunches }) => {
   const spinAgain = () => {
+    clearLunches()
     setIsSpinning(true)
     getLunches()
   }
@@ -13,14 +14,14 @@ const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches
     if (lunches.length && isSpinning) {
       setTimeout(() => {
         setIsSpinning(false)
-      }, 2000)
+      }, 8000)
     }
   }, [lunches])
 
   if (!lunches.length && !isSpinning) return null
   return (
     <>
-      <SpinWheel lunches={lunches} />
+      <SpinWheel isSpinning={isSpinning} lunches={lunches.length ? [...lunches, ...lunches, winner, ...lunches] : []} />
       <SpinResult winner={winner} isOpen={!isSpinning} clearLunches={clearLunches} spinAgain={spinAgain} />
     </>
   )

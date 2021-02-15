@@ -1,23 +1,78 @@
 import styled from "styled-components"
 
+// Spin Wheel Components
 export const Spinner = styled.div`
   width: 40%;
   margin: 0 auto;
   background-color: #515050;
   overflow: hidden;
   border-radius: 5px;
+  position: relative;
+  height: 35rem;
+`
+
+export const CardCntr = styled.div`
+  position: absolute;
+  width: 100%;
+  animation: ${props => (props.isSpinning ? "spin 10s linear infinite" : "none")};
+
+  @keyframes spin {
+    0% {
+      top: 0;
+    }
+    10% {
+      top: -80rem;
+    }
+    20% {
+      top: -150rem;
+    }
+    30% {
+      top: -200rem;
+    }
+    40% {
+      top: -240rem;
+    }
+    50% {
+      top: -260rem;
+    }
+    55% {
+      top: -265rem;
+    }
+    60% {
+      top: -267rem;
+    }
+    70%,
+    100% {
+      top: -268rem;
+    }
+  }
+`
+
+export const WheelPointer = styled.div`
+  position: absolute;
+  height: 0;
+  width: 0;
+  right: 0;
+  top: 15rem;
+  bottom: 15rem;
+  border-top: 2.5rem solid transparent;
+  border-bottom: 2.5rem solid transparent;
+  border-right: 5rem solid #8a1919;
 `
 
 export const LunchCard = styled.div`
-  background-color: #ffffff;
+  background-color: transparent;
+  color: #ffffff;
   border-radius: 5px;
   padding: 2rem;
   margin: 0.5rem;
   text-align: center;
   font-weight: 600;
   font-size: 1rem;
+  border: 0.5rem solid #e9ca30;
 `
 
+// Spin Result components
 export const ResultCntr = styled.div`
   color: #414141;
   font-size: 1rem;

@@ -6,7 +6,7 @@ import { convertMetersToMiles } from "../../utils"
 
 const SpinResult = ({ winner, isOpen, clearLunches, spinAgain }) => {
   if (!winner) return null
-  console.log(winner)
+
   return (
     <Modal visible={isOpen} onCancel={clearLunches} footer={null}>
       <ResultCntr>
