@@ -3,6 +3,6 @@ import App from "./App"
 
 test("Renders", () => {
   render(<App />)
-  const subHeader = screen.getByText(/About?/i)
-  expect(subHeader).toBeInTheDocument()
+  const logo = screen.getByAltText("The lunch is right logo")
+  expect(logo).toBeVisible
 })

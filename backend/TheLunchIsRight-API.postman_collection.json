@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "66a4023d-c9f9-4fcd-a722-b3f837db5307",
+		"name": "TheLunchIsRight-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetCollections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"There are 24 categories\", () => {",
+							"    const results = pm.response.json()",
+							"    pm.expect(results.data.categories.length).to.eql(24)",
+							"})",
+							"",
+							"pm.test(\"Catergories in alphabetical order\", () => {",
+							"    const results = pm.response.json()",
+							"    pm.expect(results.data.categories[0]).to.have.property('title', 'American')",
+							"    pm.expect(results.data.categories[23]).to.have.property('title', 'Vegetarian')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\n \tcategories{\n    alias\n    title\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql"
+					]
+				},
+				"description": "Graphql query to retrieve a list of all categories of restaurants"
+			},
+			"response": []
+		},
+		{
+			"name": "GetLunchSpin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Winner was selected\", () => {",
+							"    const results = pm.response.json()",
+							"    pm.expect(results.data.getLunchSpin.winner).to.haveOwnProperty('id')",
+							"})",
+							"",
+							"pm.test(\"Winner is an option\", () => {",
+							"    const results = pm.response.json()",
+							"    pm.expect(results.data.getLunchSpin.winner.id).to.be.oneOf(results.data.getLunchSpin.lunches.map(x => x.id))",
+							"})",
+							"",
+							"pm.test(\"Lunches is an array\", () => {",
+							"    const results = pm.response.json()",
+							"    pm.expect(results.data.getLunchSpin.lunches).to.be.instanceOf(Array)",
+							"})",
+							"",
+							"pm.test(\"Lunches is not empty\", () => {",
+							"    const results = pm.response.json()",
+							"    pm.expect(results.data.getLunchSpin.lunches).to.not.be.empty",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "  query GetLuncheSpin($location: String!, $categories: String!, $radius: Float!, $price: String!) {\n    getLunchSpin(location: $location, categories: $categories, radius: $radius, price: $price) {\n      winner {\n        id\n        name\n        url\n        display_phone\n        review_count\n        rating\n        price\n        photos\n        distance\n        location {\n          address1\n          city\n          state\n          postal_code\n        }\n      }\n      lunches {\n        id\n        name\n      }\n    }\n  }",
+						"variables": "{\n    \"location\": \"78205\",\n    \"categories\": \"restaurants\",\n    \"radius\": 8046,\n    \"price\": \"1,2,3,4\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
