@@ -16,7 +16,6 @@ const SpinOptions = ({ location, setLocation, getLunches, hasLunches, isSpinning
       return
     }
     setError("")
-    setLocation(inputLocation)
     getLunches()
     setIsSpinning(true)
   }
@@ -29,6 +28,7 @@ const SpinOptions = ({ location, setLocation, getLunches, hasLunches, isSpinning
           placeholder={"Location i.e. postal code, street name, etc"}
           value={inputLocation}
           onChange={e => setInputLocation(e.target.value)}
+          onBlur={() => setLocation(inputLocation)}
         />
         <Button type={"primary"} onClick={handleGetLunches}>
           Spin The Wheel

@@ -17,6 +17,8 @@ export default (state = initialState, action) => {
         ...state,
         isSpinning: action.isSpinning
       }
+    case actions.CLEAR_LUNCHES:
+      return { ...initialState }
     default:
       return state
   }

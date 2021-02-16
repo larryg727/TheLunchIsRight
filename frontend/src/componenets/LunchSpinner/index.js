@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import LunchSpinner from "./LunchSpinner"
-import { SetIsSpinning, SetLunches } from "../../redux/actions"
+import { SetIsSpinning, ClearLunches } from "../../redux/actions"
 
 const mapStateToProps = state => ({
   lunches: state.LunchChoices.lunches,
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setIsSpinning: isSpinning => dispatch(SetIsSpinning(isSpinning)),
-  clearLunches: () => dispatch(SetLunches([], null))
+  clearLunches: () => dispatch(ClearLunches())
 })
 
 export default connect(

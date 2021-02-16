@@ -3,17 +3,22 @@ import styled from "styled-components"
 // Spin Wheel Components
 export const Spinner = styled.div`
   width: 40%;
-  margin: 0 auto;
+  margin: 28px auto;
   background-color: #515050;
   overflow: hidden;
   border-radius: 5px;
   position: relative;
   height: 35rem;
+
+  @media (max-width: 698px) {
+    width: 100%;
+  }
 `
 
 export const CardCntr = styled.div`
   position: absolute;
   width: 100%;
+  top: ${props => (props.isSpinning ? "0" : "-268rem")};
   animation: ${props => (props.isSpinning ? "spin 10s linear infinite" : "none")};
 
   @keyframes spin {

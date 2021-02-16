@@ -10,9 +10,21 @@ const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches
     getLunches()
   }
 
+  const getSpinnerLunches = () => {
+    let spinnerLunches = []
+    while (spinnerLunches.length < 50) {
+      spinnerLunches.push(...lunches)
+    }
+    spinnerLunches[40] = winner
+    return spinnerLunches
+  }
+
   useEffect(() => {
+    console.log("whatt")
     if (lunches.length && isSpinning) {
+      console.log("ooook")
       setTimeout(() => {
+        console.log("nooooo")
         setIsSpinning(false)
       }, 8000)
     }
@@ -21,7 +33,7 @@ const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches
   if (!lunches.length && !isSpinning) return null
   return (
     <>
-      <SpinWheel isSpinning={isSpinning} lunches={lunches.length ? [...lunches, ...lunches, winner, ...lunches] : []} />
+      <SpinWheel isSpinning={isSpinning} lunches={lunches.length ? getSpinnerLunches() : []} />
       <SpinResult winner={winner} isOpen={!isSpinning} clearLunches={clearLunches} spinAgain={spinAgain} />
     </>
   )

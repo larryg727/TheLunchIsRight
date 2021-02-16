@@ -4,6 +4,7 @@ import SpinOptions from "../SpinOptions"
 import LunchSpinner from "../LunchSpinner"
 import { gql, useLazyQuery } from "@apollo/client"
 import { message } from "antd"
+import { HeroCntr, Logo, Content } from "./components"
 
 const GET_LUNCHES = gql`
   query getLunches($location: String!, $categories: String!, $radius: Float!, $price: String!) {
@@ -33,14 +34,8 @@ const GET_LUNCHES = gql`
   }
 `
 
-const HomePage = ({ setLunches, setIsSpinning, location, additionalOptions }) => {
-  const [getLunches] = useLazyQuery(GET_LUNCHES, {
-    variables: {
-      location: location,
-      categories: additionalOptions.categories.length ? additionalOptions.categories.join(",") : "restaurants",
-      radius: additionalOptions.radius,
-      price: additionalOptions.price.join(",")
-    },
+const HomePage = ({ setLunches, setIsSpinning, location, additionalOptions, isSpinning, hasLunches }) => {
+  const [getLunchesQuery] = useLazyQuery(GET_LUNCHES, {
     onCompleted: data => {
       setLunches(data.getLunchSpin.lunches, data.getLunchSpin.winner)
     },
@@ -51,11 +46,40 @@ const HomePage = ({ setLunches, setIsSpinning, location, additionalOptions }) =>
     fetchPolicy: "network-only"
   })
 
+  const getLunches = () => {
+    getLunchesQuery({
+      variables: {
+        location: location,
+        categories: additionalOptions.categories.length ? additionalOptions.categories.join(",") : "restaurants",
+        radius: additionalOptions.radius,
+        price: additionalOptions.price.join(",")
+      }
+    })
+  }
+
   return (
-    <div>
-      <SpinOptions getLunches={getLunches} />
-      <LunchSpinner getLunches={getLunches} />
-    </div>
+    <>
+      <HeroCntr>
+        {!isSpinning && !hasLunches ? (
+          <Logo src={"/assets/lunchIsRightLogo.png"} alt={"The lunch is right logo"} />
+        ) : null}
+        <SpinOptions getLunches={getLunches} />
+        <LunchSpinner getLunches={getLunches} />
+      </HeroCntr>
+      <Content>
+        <h2>About</h2>
+        <p>Tired of the ago old question, "What do you want to eat?" Well here is your solution!</p>
+        <p>
+          Simply enter your location (postal codes or addresses / street names work best) of what area you are looking
+          to eat in and click spin. Then, BOOM!, your choice has been made for you. Your welcome.
+        </p>
+        <p>
+          If you have certain preferences like types of food, pricing, or how far you would like to travel then just
+          open up the additional options and add your preferences. If you need more information about the restaurant
+          then just click on the Yelp link to view more information and reviews.
+        </p>
+      </Content>
+    </>
   )
 }
 
@@ -67,7 +91,9 @@ HomePage.propType = {
     radius: PropTypes.number.isRequired,
     price: PropTypes.arrayOf(PropTypes.string).isRequired
   }).isRequired,
-  location: PropTypes.string
+  location: PropTypes.string,
+  isSpinning: PropTypes.bool.isRequired,
+  hasLunches: PropTypes.bool.isRequired
 }
 
 export default HomePage

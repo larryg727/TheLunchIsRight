@@ -20,3 +20,7 @@ export const SetAdditionalOptions = additionalOptions => ({
   type: actions.SET_ADDITIONAL_OPTIONS,
   additionalOptions
 })
+
+export const ClearLunches = () => ({
+  type: actions.CLEAR_LUNCHES
+})
