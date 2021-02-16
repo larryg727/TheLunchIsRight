@@ -37,3 +37,24 @@ with an actual api key.
 
 
 ##Testing
+#### Frontend
+First change directory into the `frontend` directory
+
+While in development you can run the tests in an interactive mode with the following command in your terminal:
+```shell
+npm test
+```
+
+
+To run the test suite normally you can use the following command:
+```shell
+npm run test-app
+```  
+
+#### Backend
+First change directory into the `backend` directory
+
+To run the test suite you can use the following command:
+```shell
+npm run test
+```
