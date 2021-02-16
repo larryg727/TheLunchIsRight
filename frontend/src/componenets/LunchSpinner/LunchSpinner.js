@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import SpinWheel from "./SpinWheel"
 import SpinResult from "./SpinResult"
@@ -20,11 +20,8 @@ const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches
   }
 
   useEffect(() => {
-    console.log("whatt")
     if (lunches.length && isSpinning) {
-      console.log("ooook")
       setTimeout(() => {
-        console.log("nooooo")
         setIsSpinning(false)
       }, 8000)
     }

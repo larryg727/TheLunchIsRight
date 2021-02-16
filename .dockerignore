@@ -1,6 +1,5 @@
 .idea
+.git
 */node_modules/
-*/.env
-frontend/build/
 .DS_Store
 frontend/.git-tmp/
