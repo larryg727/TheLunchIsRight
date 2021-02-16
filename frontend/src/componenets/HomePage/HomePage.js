@@ -61,10 +61,13 @@ const HomePage = ({ setLunches, setIsSpinning, location, additionalOptions, isSp
     <>
       <HeroCntr>
         {!isSpinning && !hasLunches ? (
-          <Logo src={"/assets/lunchIsRightLogo.png"} alt={"The lunch is right logo"} />
-        ) : null}
-        <SpinOptions getLunches={getLunches} />
-        <LunchSpinner getLunches={getLunches} />
+          <>
+            <Logo src={"/assets/lunchIsRightLogo.png"} alt={"The lunch is right logo"} />
+            <SpinOptions getLunches={getLunches} />
+          </>
+        ) : (
+          <LunchSpinner getLunches={getLunches} />
+        )}
       </HeroCntr>
       <Content>
         <h2>About</h2>

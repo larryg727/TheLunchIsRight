@@ -5,7 +5,7 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons"
 import { OptionsContainer, OptionsMain, AdditionalOptionsExpander, ExpanderButton } from "./components"
 import AdditionalOptionsForm from "../AdditionalOptionsForm"
 
-const SpinOptions = ({ location, setLocation, getLunches, hasLunches, isSpinning, setIsSpinning }) => {
+const SpinOptions = ({ location, setLocation, getLunches, setIsSpinning }) => {
   const [inputLocation, setInputLocation] = useState(location)
   const [showAdditional, setShowAdditional] = useState(false)
   const [error, setError] = useState("")
@@ -20,7 +20,6 @@ const SpinOptions = ({ location, setLocation, getLunches, hasLunches, isSpinning
     setIsSpinning(true)
   }
 
-  if (isSpinning || hasLunches) return null
   return (
     <OptionsContainer>
       <OptionsMain>
@@ -57,8 +56,6 @@ SpinOptions.propTypes = {
   location: PropTypes.string,
   setLocation: PropTypes.func.isRequired,
   getLunches: PropTypes.func.isRequired,
-  isSpinning: PropTypes.bool.isRequired,
-  hasLunches: PropTypes.bool.isRequired,
   setIsSpinning: PropTypes.func.isRequired
 }
 

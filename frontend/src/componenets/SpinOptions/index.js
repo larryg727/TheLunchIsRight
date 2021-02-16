@@ -1,11 +1,9 @@
 import { connect } from "react-redux"
 import SpinOptions from "./SpinOptions"
-import { SetIsSpinning, SetLocation, SetLunches } from "../../redux/actions"
+import { SetIsSpinning, SetLocation } from "../../redux/actions"
 
 const mapStateToProps = state => ({
-  location: state.Options.location,
-  isSpinning: state.LunchChoices.isSpinning,
-  hasLunches: state.LunchChoices.lunches.length > 0
+  location: state.Options.location
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -27,7 +27,6 @@ const LunchSpinner = ({ lunches, winner, isSpinning, setIsSpinning, clearLunches
     }
   }, [lunches])
 
-  if (!lunches.length && !isSpinning) return null
   return (
     <>
       <SpinWheel isSpinning={isSpinning} lunches={lunches.length ? getSpinnerLunches() : []} />
