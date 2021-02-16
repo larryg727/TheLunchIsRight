@@ -36,7 +36,7 @@ with an actual api key.
 4. You should now be able to navigate to `http://localhost` to view the application
 
 
-##Testing
+## Testing
 #### Frontend
 First change directory into the `frontend` directory
 
