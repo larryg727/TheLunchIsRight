@@ -52,11 +52,11 @@ npm run test-app
 ```  
 
 #### Backend
-NOTE: There is also a Postman collection file with tests that can be imported and used with Postman.  
+NOTE: There is also a Postman collection file (`backend/TheLunchIsRight-API.postman_collection.json`) with tests that can be imported and used with Postman.  
 
-First change directory into the `backend` directory
+To run the tests form your terminal change directory into the `backend` directory
 
-To run the test suite you can use the following command:
+Then to run the test suite you can use the following command:
 ```shell
 npm run test
 ```
