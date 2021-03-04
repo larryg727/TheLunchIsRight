@@ -3,7 +3,7 @@ import SpinOptions from "../SpinOptions"
 import LunchSpinner from "../LunchSpinner"
 import { gql, useLazyQuery } from "@apollo/client"
 import { message } from "antd"
-import { HeroCntr, Logo, Content } from "./components"
+import { HeroCntr, Logo, Content, Footer, YelpCreditCntr } from "./components"
 import { useSelector, useDispatch } from "react-redux"
 import { SetIsSpinning, SetLunches } from "../../redux/actions"
 
@@ -78,18 +78,31 @@ const HomePage = () => {
         )}
       </HeroCntr>
       <Content>
-        <h2>About</h2>
+        <h2>About The Lunch Is Right Spinner</h2>
         <p>Tired of the ago old question, "What do you want to eat?" Well here is your solution!</p>
         <p>
-          Simply enter your location (postal codes or addresses / street names work best) of what area you are looking
-          to eat in and click spin. Then, BOOM!, your choice has been made for you. Your welcome.
+          Simply enter your location (postal codes, street names, or your address work best) of what area you are
+          looking to eat in and click spin. Then, BOOM!, your choice has been made for you. Your welcome.
         </p>
         <p>
-          If you have certain preferences like types of food, pricing, or how far you would like to travel then just
-          open up the additional options and add your preferences. If you need more information about the restaurant
-          then just click on the Yelp link to view more information and reviews.
+          If you don't like the pick, just open up and edit the additional options like types of food, pricing range, or
+          how far you are willing to travel and spin again. If you would like more information about the winning
+          restaurant then just click on the Yelp link on the results card to view more information and their reviews.
         </p>
       </Content>
+      <Footer>
+        <Content>
+          <YelpCreditCntr>
+            Powered by: <img src="/assets/yelp-logo.png" alt="yelp logo" />
+          </YelpCreditCntr>
+        </Content>
+        <p>
+          2021 - Developed by{" "}
+          <a href="https://github.com/larryg727/TheLunchIsRight" target="_blank">
+            Larry Gonzales
+          </a>
+        </p>
+      </Footer>
     </>
   )
 }

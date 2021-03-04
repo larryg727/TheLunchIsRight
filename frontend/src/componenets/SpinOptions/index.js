@@ -29,7 +29,7 @@ const SpinOptions = ({ getLunches }) => {
     <OptionsContainer>
       <OptionsMain>
         <Input
-          placeholder={"Location i.e. postal code, street name, etc"}
+          placeholder={"Location i.e. postal codes, addresses, or street names"}
           value={inputLocation}
           onChange={e => setInputLocation(e.target.value)}
           onBlur={() => dispatch(SetLocation(inputLocation))}

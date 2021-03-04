@@ -19,34 +19,34 @@ export const CardCntr = styled.div`
   position: absolute;
   width: 100%;
   top: ${props => (props.isSpinning ? "0" : "-268rem")};
-  animation: ${props => (props.isSpinning ? "spin 10s linear infinite" : "none")};
+  animation: ${props => (props.isSpinning ? "spin 20s linear 1" : "none")};
 
   @keyframes spin {
     0% {
       top: 0;
     }
-    10% {
+    5% {
       top: -80rem;
     }
-    20% {
+    10% {
       top: -150rem;
     }
-    30% {
+    15% {
       top: -200rem;
     }
-    40% {
+    20% {
       top: -240rem;
     }
-    50% {
+    25% {
       top: -260rem;
     }
-    55% {
+    28% {
       top: -265rem;
     }
-    60% {
+    30% {
       top: -267rem;
     }
-    70%,
+    35%,
     100% {
       top: -268rem;
     }

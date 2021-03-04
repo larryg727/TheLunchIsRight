@@ -28,3 +28,24 @@ export const Content = styled.div`
   padding: 28px;
   text-align: center;
 `
+
+export const Footer = styled.div`
+  width: 100%;
+  background-color: #1b1b1b;
+  color: #ffffff;
+
+  & > p {
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 4px;
+  }
+`
+
+export const YelpCreditCntr = styled.div`
+  font-size: 1.2rem;
+
+  & > img {
+    width: 140px;
+    margin-left: 8px;
+  }
+`

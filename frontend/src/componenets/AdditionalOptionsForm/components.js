@@ -30,3 +30,9 @@ export const Label = styled.label`
     margin-left: 6px;
   }
 `
+
+export const CategoriesBtnCntr = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+`

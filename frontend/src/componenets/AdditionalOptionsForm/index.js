@@ -1,8 +1,16 @@
 import React from "react"
 import { useQuery, gql } from "@apollo/client"
-import { AdditionalFormCntr, CategorySelect, FormGroup, FormGroupHalf, CheckboxGroup, Label } from "./components"
+import {
+  AdditionalFormCntr,
+  CategorySelect,
+  FormGroup,
+  FormGroupHalf,
+  CheckboxGroup,
+  Label,
+  CategoriesBtnCntr
+} from "./components"
 import { useFormHandler, convertMetersToMiles, convertMilesToMeters } from "../../utils"
-import { Checkbox, Input } from "antd"
+import { Button, Checkbox, Input } from "antd"
 import { useSelector, useDispatch } from "react-redux"
 import { SetAdditionalOptions } from "../../redux/actions"
 
@@ -34,6 +42,17 @@ const AdditionalOptionsForm = () => {
       }
     }
   })
+
+  const handleClearAllCategories = () => {
+    formHandler("categories", [])
+    dispatch(SetAdditionalOptions([]))
+  }
+
+  const handleSelectAllCategories = () => {
+    const allCategories = categoriesData.categories.map(c => c.alias)
+    formHandler("categories", allCategories)
+    dispatch(SetAdditionalOptions(allCategories))
+  }
 
   return (
     <AdditionalFormCntr>
@@ -76,6 +95,14 @@ const AdditionalOptionsForm = () => {
               </Option>
             ))}
         </CategorySelect>
+        <CategoriesBtnCntr>
+          <Button type={"default"} size={"small"} onClick={handleClearAllCategories}>
+            Clear All Categories
+          </Button>
+          <Button type={"default"} size={"small"} onClick={handleSelectAllCategories}>
+            Select All Categories
+          </Button>
+        </CategoriesBtnCntr>
       </FormGroup>
     </AdditionalFormCntr>
   )
