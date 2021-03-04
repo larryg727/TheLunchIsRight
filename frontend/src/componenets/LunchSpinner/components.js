@@ -89,6 +89,7 @@ export const ResultCntr = styled.div`
   & img {
     width: 30%;
     border-radius: 10%;
+    max-height: 20vh;
   }
 `
 

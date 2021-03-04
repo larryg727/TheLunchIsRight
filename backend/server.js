@@ -4,7 +4,13 @@ const { ApolloServer } = require("apollo-server-express")
 const { typeDefs, resolvers } = require("./schema")
 const YelpGraphqlAPI = require("./yelpService")
 
+const version = process.env.npm_package_version
+
 const app = express()
+
+app.get("/health", (req, res) => {
+  res.send(`Healthy. Running v${version}`)
+})
 
 const server = new ApolloServer({
   typeDefs,

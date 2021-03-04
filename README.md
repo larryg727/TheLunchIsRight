@@ -60,3 +60,32 @@ Then to run the test suite you can use the following command:
 ```shell
 npm run test
 ```
+
+
+## Deployment
+Deployment scripts are included to automate deployment of this project to AWS utilizing S3 and Cloudfront for the frontend and ECS for the the backend.
+
+### Prerequisites
+1. AWS CLI version 2 installed
+2. Infrastructure set up on AWS to host project
+   - ECR repository to store api images
+   - ECS Cluster and service set up to run task definition prepared from ECR repo
+   - Load Balancer to direct traffic to port 5000 to EC2 instance where cluster exists
+   - S3 Bucket with static website hosting enabled to host frontend build files
+   - Cloudfront sourcing from S3 bucket to quickly and securly serve application (optional)
+
+### Deploying application to infrastructure
+1. First remove `.sample` from the `.env.deploy.sample` file in the root of the project.
+2. Fill in `.env.deploy` file with appropriate variables as they pertain to your aws account and infrastructure
+3. ECR repository receives its version tag from the `./backend/package.json` so if you are pushing a changed version you can first update the version utilizing npm's versioning or by running:
+   ```shell
+   cd backend
+   npm version patch
+   ```
+
+4. Run the deploy script to build and deploy app to infrastructure with the following command:  
+NOTE: By default the deploy script will redeploy the frontend and api portion of the application. If it is only neccessary to deploy one module of the appliction it is possible by first setting the MODULE variable with
+   either `MODULE=frontend` or `MODULE=api` prior to running the deploy script.
+   ```shell
+   sh deploy.sh
+   ```

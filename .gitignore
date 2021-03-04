@@ -4,3 +4,4 @@
 frontend/build/
 .DS_Store
 frontend/.git-tmp/
+.env.deploy
