@@ -9,8 +9,8 @@ const app = express()
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({
-    YelpGraphqlAPI: new YelpGraphqlAPI()
+  dataSources: () => ({
+    yelpGraphqlApi: new YelpGraphqlAPI()
   })
 })
 

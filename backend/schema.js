@@ -41,8 +41,8 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    getLunchSpin: async (parent, args, context) => {
-      const lunches = await context.YelpGraphqlAPI.getLunches(args)
+    getLunchSpin: async (parent, args, { dataSources }) => {
+      const lunches = await dataSources.yelpGraphqlApi.getLunches(args)
       if (!lunches || !lunches.length) {
         throw new ApolloError("No Results Found. Try another location")
       }
